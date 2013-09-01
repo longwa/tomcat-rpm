@@ -1,10 +1,11 @@
 %define major_version 7
 %define minor_version 0
-%define micro_version 33
-%define appname tomcat
+%define micro_version 42
+%define appname tomcat7
 %define distname %{name}-%{version}
 
-%define basedir %{_var}/lib/%{appname}
+%define _topdir %(echo $PWD)/
+%define basedir %{_datadir}/%{appname}
 %define appdir %{basedir}/webapps
 %define bindir %{_datadir}/%{appname}/bin
 %define libdir %{_datadir}/%{appname}/lib
@@ -20,8 +21,7 @@
 %define appuid 91
 %define appgid 91
 
-
-Name: apache-tomcat
+Name: tomcat7
 Version: %{major_version}.%{minor_version}.%{micro_version}
 Release: 1%{?dist}
 Epoch: 0
@@ -29,12 +29,12 @@ Summary: Open source software implementation of the Java Servlet and JavaServer 
 Group: Networking/Daemons
 License: ASL 2.0
 URL: http://tomcat.apache.org
-Packager: Joseph Lamoree <jlamoree@ecivis.com>
-Source0: http://www.apache.org/dist/tomcat/tomcat-%{major_version}/v%{version}/bin/%{name}-%{version}.tar.gz
+Packager: Louis Garman <louisgarman@gmail.com>
+Source0: http://www.apache.org/dist/tomcat/tomcat-%{major_version}/v%{version}/bin/apache-tomcat-%{version}.tar.gz
 Source1: tomcat.sysconfig
 Source2: tomcat.init.sh
 Source3: tomcat.logrotate.sh
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+Buildroot: %{_tmppath}/apache-tomcat-%{version}-%{release}-root
 BuildArch: noarch
 
 
@@ -66,7 +66,7 @@ The host-management web application of Apache Tomcat.
 
 
 %prep
-%setup -q -b 0 -T
+%setup -n apache-tomcat-%{version} -q -b 0 -T
 
 
 %build
@@ -98,12 +98,6 @@ pushd %{buildroot}/%{homedir}
     %{__ln_s} %{workdir} work
 popd
 
-pushd %{buildroot}/%{basedir}
-    %{__ln_s} %{confdir} conf
-    %{__ln_s} %{logdir} logs
-    %{__ln_s} %{tempdir} temp
-    %{__ln_s} %{workdir} work
-popd
 
 %{__install} -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/sysconfig/%{appname}
 %{__install} -m 0755 %{SOURCE2} %{buildroot}%{_initrddir}/%{appname}
@@ -179,6 +173,9 @@ fi
 
 
 %changelog
+* Sun Sep 01 2013 Louis Garman <louisgarman@gmail.com> - 7.0.42
+- Renamed from apache-tomcat to tomcat7
+- Moved webapps dir from /var/lib to /usr/share (as per the tomcat6 rpm)
 * Fri Nov 30 2012 Joseph Lamoree <jlamoree@ecivis.com> - 7.0.33-1%{?dist}
 - First packaging of Apache Tomcat for eCivis apps
 - TODO Tomcat native connector
