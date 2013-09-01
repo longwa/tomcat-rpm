@@ -7,24 +7,22 @@
 
 . /etc/rc.d/init.d/functions
 
-APPNAME=tomcat
+APPNAME=tomcat7
 USER=tomcat
 LOCKFILE="/var/lock/subsys/$APPNAME"
 
 TOMCAT_HOME="/usr/share/$APPNAME"
 CATALINA_HOME="$TOMCAT_HOME"
-CATALINA_BASE="/var/lib/$APPNAME"
+CATALINA_BASE="$TOMCAT_HOME"
 CATALINA_OUT="/var/log/$APPNAME/catalina.out"
 CATALINA_PID="/var/run/${APPNAME}/tomcat.pid"
 CATALINA_OPTS="-Xmx512m -Djava.awt.headless=true"
-JAVA_HOME="/usr/java/latest"
-
 
 if [ -r /etc/sysconfig/$APPNAME ]; then
   . /etc/sysconfig/$APPNAME
 fi
 
-export CATALINA_HOME CATALINA_BASE CATALINA_OUT CATALINA_PID CATALINA_OPTS JAVA_HOME
+export CATALINA_HOME CATALINA_BASE CATALINA_OUT CATALINA_PID CATALINA_OPTS
 
 case "$1" in
   start)
