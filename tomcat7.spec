@@ -91,7 +91,6 @@ rm -rf %{buildroot}
 %{__install} -d -m 0775 %{buildroot}%{workdir}
 
 pushd %{buildroot}/%{homedir}
-    %{__ln_s} %{appdir} webapps
     %{__ln_s} %{confdir} conf
     %{__ln_s} %{logdir} logs
     %{__ln_s} %{tempdir} temp
