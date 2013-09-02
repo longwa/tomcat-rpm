@@ -134,7 +134,7 @@ fi
 %files
 #%defattr(0644 root root 0755)
 %doc ./{LICENSE,NOTICE,RELEASE*}
-%attr(0775 root tomcat) %dir %{logdir}
+%attr(0775 tomcat tomcat) %dir %{logdir}
 %attr(0775 tomcat tomcat) %dir %{piddir}
 %attr(0755 root root) %{_initrddir}/%{appname}
 %attr(0644 root root) %config(noreplace) %{_sysconfdir}/logrotate.d/%{appname}
@@ -144,30 +144,30 @@ fi
 %{basedir}/logs
 %{basedir}/temp
 %{basedir}/work
-%attr(0775 root tomcat) %dir %{appdir}
+%attr(0775 tomcat tomcat) %dir %{appdir}
 %{appdir}/ROOT
 %dir %{confdir}
 %dir %{confdir}/Catalina
-%attr(0775 root tomcat) %dir %{confdir}/Catalina/localhost
+%attr(0775 root root) %dir %{confdir}/Catalina/localhost
 %config(noreplace) %{confdir}/*.policy
 %config(noreplace) %{confdir}/*.properties
 %config(noreplace) %{confdir}/context.xml
 %config(noreplace) %{confdir}/server.xml
-%attr(0660 root tomcat) %config(noreplace) %{confdir}/tomcat-users.xml
+%attr(0660 tomcat tomcat) %config(noreplace) %{confdir}/tomcat-users.xml
 %config(noreplace) %{confdir}/web.xml
-%attr(0775 root tomcat) %dir %{cachedir}
-%attr(0775 root tomcat) %dir %{tempdir}
-%attr(0775 root tomcat) %dir %{workdir}
-%attr(- root root) %{homedir}
+%attr(0775 tomcat tomcat) %dir %{cachedir}
+%attr(0775 tomcat tomcat) %dir %{tempdir}
+%attr(0775 tomcat tomcat) %dir %{workdir}
+%attr(- tomcat tomcat) %{homedir}
 
 
 %files manager
-%defattr(0644 root root 0755)
+%defattr(0644 tomcat tomcat 0755)
 %{appdir}/manager
 
 
 %files host-manager
-%defattr(0644 root root 0755)
+%defattr(0644 tomcat tomcat 0755)
 %{appdir}/host-manager
 
 
