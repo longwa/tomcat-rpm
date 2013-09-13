@@ -23,7 +23,7 @@
 
 Name: tomcat7
 Version: %{major_version}.%{minor_version}.%{micro_version}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Epoch: 0
 Summary: Open source software implementation of the Java Servlet and JavaServer Pages technologies.
 Group: Networking/Daemons
@@ -43,27 +43,6 @@ Tomcat is the servlet container that is used in the official Reference
 Implementation for the Java Servlet and JavaServer Pages technologies.
 The Java Servlet and JavaServer Pages specifications are developed by
 Sun under the Java Community Process.
-
-
-%package manager
-Summary: The management web application of Apache Tomcat.
-Group: System Environment/Applications
-Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
-
-%description manager
-The management web application of Apache Tomcat.
-
-
-%package host-manager
-Summary: The host-management web application of Apache Tomcat.
-Group: System Environment/Applications
-Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
-
-%description host-manager
-The host-management web application of Apache Tomcat.
-
 
 %prep
 %setup -n apache-tomcat-%{version} -q -b 0 -T
@@ -106,7 +85,6 @@ popd
 %{__cp} -a bin/*.sh %{buildroot}%{bindir}
 %{__cp} -a conf/*.{policy,properties,xml} %{buildroot}%{confdir}
 %{__cp} -a lib/*.jar %{buildroot}%{libdir}
-%{__cp} -a webapps/{ROOT,manager,host-manager} %{buildroot}%{appdir}
 
 
 %clean
@@ -145,7 +123,6 @@ fi
 %{basedir}/temp
 %{basedir}/work
 %attr(0775 tomcat tomcat) %dir %{appdir}
-%{appdir}/ROOT
 %dir %{confdir}
 %dir %{confdir}/Catalina
 %attr(0775 root root) %dir %{confdir}/Catalina/localhost
@@ -160,18 +137,9 @@ fi
 %attr(0775 tomcat tomcat) %dir %{workdir}
 %attr(- tomcat tomcat) %{homedir}
 
-
-%files manager
-%defattr(0644 tomcat tomcat 0755)
-%{appdir}/manager
-
-
-%files host-manager
-%defattr(0644 tomcat tomcat 0755)
-%{appdir}/host-manager
-
-
 %changelog
+* Sun Sep 13 2013 Louis Garman <louisgarman@gmail.com> - 7.0.42-2
+- Removed manager, ROOT, and host-manager apps
 * Sun Sep 01 2013 Louis Garman <louisgarman@gmail.com> - 7.0.42
 - Renamed from apache-tomcat to tomcat7
 - Moved webapps dir from /var/lib to /usr/share (as per the tomcat6 rpm)
