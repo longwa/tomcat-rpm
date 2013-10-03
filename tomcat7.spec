@@ -23,7 +23,7 @@
 
 Name: tomcat7
 Version: %{major_version}.%{minor_version}.%{micro_version}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Epoch: 0
 Summary: Open source software implementation of the Java Servlet and JavaServer Pages technologies.
 Group: Networking/Daemons
