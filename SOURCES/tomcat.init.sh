@@ -37,6 +37,7 @@ case "$1" in
         ;;
   restart)
         $0 stop
+        sleep 5
         $0 start
         ;;
   condrestart)
