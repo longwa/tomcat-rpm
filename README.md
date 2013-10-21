@@ -8,6 +8,7 @@ Usage
 mkdir -p BUILD
 mkdir -p BUILDROOT
 mkdir -p RPMS
+mkdir -p SRPMS
 
 rpmbuild -ba tomcat7.spec
 
