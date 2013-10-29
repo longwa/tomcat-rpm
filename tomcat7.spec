@@ -1,6 +1,6 @@
 %define major_version 7
 %define minor_version 0
-%define micro_version 42
+%define micro_version 47
 %define appname tomcat7
 %define distname %{name}-%{version}
 
@@ -23,7 +23,7 @@
 
 Name: tomcat7
 Version: %{major_version}.%{minor_version}.%{micro_version}
-Release: 4%{?dist}
+Release: 1%{?dist}
 Epoch: 0
 Summary: Open source software implementation of the Java Servlet and JavaServer Pages technologies.
 Group: Networking/Daemons
