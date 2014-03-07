@@ -1,6 +1,6 @@
 %define major_version 7
 %define minor_version 0
-%define micro_version 50
+%define micro_version 52
 %define appname tomcat7
 %define distname %{name}-%{version}
 
@@ -18,8 +18,8 @@
 %define workdir %{cachedir}/work
 
 %define appuser tomcat
-%define appuid 91
-%define appgid 91
+%define appuid 250
+%define appgid 250
 
 Name: tomcat7
 Version: %{major_version}.%{minor_version}.%{micro_version}
